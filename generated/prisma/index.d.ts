@@ -15,12 +15,12 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 /**
  * Model Recipe
- * 
+ *
  */
 export type Recipe = $Result.DefaultSelection<Prisma.$RecipePayload>
 /**
  * Model FavoriteRecipe
- * 
+ *
  */
 export type FavoriteRecipe = $Result.DefaultSelection<Prisma.$FavoriteRecipePayload>
 
@@ -30,9 +30,9 @@ export type FavoriteRecipe = $Result.DefaultSelection<Prisma.$FavoriteRecipePayl
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
- * const prisma = new PrismaClient()
+ * const middleware = new PrismaClient()
  * // Fetch zero or more Recipes
- * const recipes = await prisma.recipe.findMany()
+ * const recipes = await middleware.recipe.findMany()
  * ```
  *
  *
@@ -51,9 +51,9 @@ export class PrismaClient<
    * Type-safe database client for TypeScript & Node.js
    * @example
    * ```
-   * const prisma = new PrismaClient()
+   * const middleware = new PrismaClient()
    * // Fetch zero or more Recipes
-   * const recipes = await prisma.recipe.findMany()
+   * const recipes = await middleware.recipe.findMany()
    * ```
    *
    *
@@ -84,7 +84,7 @@ export class PrismaClient<
    * Executes a prepared raw query and returns the number of affected rows.
    * @example
    * ```
-   * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
+   * const result = await middleware.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
    * ```
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
@@ -96,7 +96,7 @@ export class PrismaClient<
    * Susceptible to SQL injections, see documentation.
    * @example
    * ```
-   * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
+   * const result = await middleware.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
    * ```
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
@@ -107,7 +107,7 @@ export class PrismaClient<
    * Performs a prepared raw query and returns the `SELECT` data.
    * @example
    * ```
-   * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
+   * const result = await middleware.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
    * ```
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
@@ -119,7 +119,7 @@ export class PrismaClient<
    * Susceptible to SQL injections, see documentation.
    * @example
    * ```
-   * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
+   * const result = await middleware.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
    * ```
    *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
@@ -131,13 +131,13 @@ export class PrismaClient<
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
    * @example
    * ```
-   * const [george, bob, alice] = await prisma.$transaction([
-   *   prisma.user.create({ data: { name: 'George' } }),
-   *   prisma.user.create({ data: { name: 'Bob' } }),
-   *   prisma.user.create({ data: { name: 'Alice' } }),
+   * const [george, bob, alice] = await middleware.$transaction([
+   *   middleware.user.create({ data: { name: 'George' } }),
+   *   middleware.user.create({ data: { name: 'Bob' } }),
+   *   middleware.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
@@ -150,21 +150,21 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.recipe`: Exposes CRUD operations for the **Recipe** model.
+   * `middleware.recipe`: Exposes CRUD operations for the **Recipe** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Recipes
-    * const recipes = await prisma.recipe.findMany()
+    * const recipes = await middleware.recipe.findMany()
     * ```
     */
   get recipe(): Prisma.RecipeDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.favoriteRecipe`: Exposes CRUD operations for the **FavoriteRecipe** model.
+   * `middleware.favoriteRecipe`: Exposes CRUD operations for the **FavoriteRecipe** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more FavoriteRecipes
-    * const favoriteRecipes = await prisma.favoriteRecipe.findMany()
+    * const favoriteRecipes = await middleware.favoriteRecipe.findMany()
     * ```
     */
   get favoriteRecipe(): Prisma.FavoriteRecipeDelegate<ExtArgs, ClientOptions>;
@@ -809,11 +809,11 @@ export namespace Prisma {
   export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
   export interface PrismaClientOptions {
     /**
-     * Overwrites the datasource url from your schema.prisma file
+     * Overwrites the datasource url from your schema.middleware file
      */
     datasources?: Datasources
     /**
-     * Overwrites the datasource url from your schema.prisma file
+     * Overwrites the datasource url from your schema.middleware file
      */
     datasourceUrl?: string
     /**
@@ -825,7 +825,7 @@ export namespace Prisma {
      * ```
      * // Defaults to stdout
      * log: ['query', 'info', 'warn', 'error']
-     * 
+     *
      * // Emit as events
      * log: [
      *   { emit: 'stdout', level: 'query' },
@@ -849,10 +849,10 @@ export namespace Prisma {
     }
     /**
      * Global configuration for omitting model fields by default.
-     * 
+     *
      * @example
      * ```
-     * const prisma = new PrismaClient({
+     * const middleware = new PrismaClient({
      *   omit: {
      *     user: {
      *       password: true
@@ -1056,55 +1056,55 @@ export namespace Prisma {
     where?: RecipeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Recipes to fetch.
      */
     orderBy?: RecipeOrderByWithRelationInput | RecipeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: RecipeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Recipes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Recipes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Recipes
     **/
     _count?: true | RecipeCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: RecipeAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: RecipeSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: RecipeMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: RecipeMaxAggregateInputType
@@ -1249,7 +1249,7 @@ export namespace Prisma {
      * @param {RecipeFindUniqueArgs} args - Arguments to find a Recipe
      * @example
      * // Get one Recipe
-     * const recipe = await prisma.recipe.findUnique({
+     * const recipe = await middleware.recipe.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -1263,7 +1263,7 @@ export namespace Prisma {
      * @param {RecipeFindUniqueOrThrowArgs} args - Arguments to find a Recipe
      * @example
      * // Get one Recipe
-     * const recipe = await prisma.recipe.findUniqueOrThrow({
+     * const recipe = await middleware.recipe.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -1278,7 +1278,7 @@ export namespace Prisma {
      * @param {RecipeFindFirstArgs} args - Arguments to find a Recipe
      * @example
      * // Get one Recipe
-     * const recipe = await prisma.recipe.findFirst({
+     * const recipe = await middleware.recipe.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -1294,7 +1294,7 @@ export namespace Prisma {
      * @param {RecipeFindFirstOrThrowArgs} args - Arguments to find a Recipe
      * @example
      * // Get one Recipe
-     * const recipe = await prisma.recipe.findFirstOrThrow({
+     * const recipe = await middleware.recipe.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -1309,14 +1309,14 @@ export namespace Prisma {
      * @param {RecipeFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Recipes
-     * const recipes = await prisma.recipe.findMany()
-     * 
+     * const recipes = await middleware.recipe.findMany()
+     *
      * // Get first 10 Recipes
-     * const recipes = await prisma.recipe.findMany({ take: 10 })
-     * 
+     * const recipes = await middleware.recipe.findMany({ take: 10 })
+     *
      * // Only select the `id`
-     * const recipeWithIdOnly = await prisma.recipe.findMany({ select: { id: true } })
-     * 
+     * const recipeWithIdOnly = await middleware.recipe.findMany({ select: { id: true } })
+     *
      */
     findMany<T extends RecipeFindManyArgs>(args?: SelectSubset<T, RecipeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -1325,12 +1325,12 @@ export namespace Prisma {
      * @param {RecipeCreateArgs} args - Arguments to create a Recipe.
      * @example
      * // Create one Recipe
-     * const Recipe = await prisma.recipe.create({
+     * const Recipe = await middleware.recipe.create({
      *   data: {
      *     // ... data to create a Recipe
      *   }
      * })
-     * 
+     *
      */
     create<T extends RecipeCreateArgs>(args: SelectSubset<T, RecipeCreateArgs<ExtArgs>>): Prisma__RecipeClient<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -1339,12 +1339,12 @@ export namespace Prisma {
      * @param {RecipeCreateManyArgs} args - Arguments to create many Recipes.
      * @example
      * // Create many Recipes
-     * const recipe = await prisma.recipe.createMany({
+     * const recipe = await middleware.recipe.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends RecipeCreateManyArgs>(args?: SelectSubset<T, RecipeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -1353,14 +1353,14 @@ export namespace Prisma {
      * @param {RecipeCreateManyAndReturnArgs} args - Arguments to create many Recipes.
      * @example
      * // Create many Recipes
-     * const recipe = await prisma.recipe.createManyAndReturn({
+     * const recipe = await middleware.recipe.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many Recipes and only return the `id`
-     * const recipeWithIdOnly = await prisma.recipe.createManyAndReturn({
+     * const recipeWithIdOnly = await middleware.recipe.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -1368,7 +1368,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends RecipeCreateManyAndReturnArgs>(args?: SelectSubset<T, RecipeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -1377,12 +1377,12 @@ export namespace Prisma {
      * @param {RecipeDeleteArgs} args - Arguments to delete one Recipe.
      * @example
      * // Delete one Recipe
-     * const Recipe = await prisma.recipe.delete({
+     * const Recipe = await middleware.recipe.delete({
      *   where: {
      *     // ... filter to delete one Recipe
      *   }
      * })
-     * 
+     *
      */
     delete<T extends RecipeDeleteArgs>(args: SelectSubset<T, RecipeDeleteArgs<ExtArgs>>): Prisma__RecipeClient<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -1391,7 +1391,7 @@ export namespace Prisma {
      * @param {RecipeUpdateArgs} args - Arguments to update one Recipe.
      * @example
      * // Update one Recipe
-     * const recipe = await prisma.recipe.update({
+     * const recipe = await middleware.recipe.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1399,7 +1399,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends RecipeUpdateArgs>(args: SelectSubset<T, RecipeUpdateArgs<ExtArgs>>): Prisma__RecipeClient<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -1408,12 +1408,12 @@ export namespace Prisma {
      * @param {RecipeDeleteManyArgs} args - Arguments to filter Recipes to delete.
      * @example
      * // Delete a few Recipes
-     * const { count } = await prisma.recipe.deleteMany({
+     * const { count } = await middleware.recipe.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends RecipeDeleteManyArgs>(args?: SelectSubset<T, RecipeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -1424,7 +1424,7 @@ export namespace Prisma {
      * @param {RecipeUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Recipes
-     * const recipe = await prisma.recipe.updateMany({
+     * const recipe = await middleware.recipe.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1432,7 +1432,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends RecipeUpdateManyArgs>(args: SelectSubset<T, RecipeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -1441,7 +1441,7 @@ export namespace Prisma {
      * @param {RecipeUpdateManyAndReturnArgs} args - Arguments to update many Recipes.
      * @example
      * // Update many Recipes
-     * const recipe = await prisma.recipe.updateManyAndReturn({
+     * const recipe = await middleware.recipe.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1449,9 +1449,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more Recipes and only return the `id`
-     * const recipeWithIdOnly = await prisma.recipe.updateManyAndReturn({
+     * const recipeWithIdOnly = await middleware.recipe.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -1462,7 +1462,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends RecipeUpdateManyAndReturnArgs>(args: SelectSubset<T, RecipeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -1471,7 +1471,7 @@ export namespace Prisma {
      * @param {RecipeUpsertArgs} args - Arguments to update or create a Recipe.
      * @example
      * // Update or create a Recipe
-     * const recipe = await prisma.recipe.upsert({
+     * const recipe = await middleware.recipe.upsert({
      *   create: {
      *     // ... data to create a Recipe
      *   },
@@ -1493,7 +1493,7 @@ export namespace Prisma {
      * @param {RecipeCountArgs} args - Arguments to filter Recipes to count.
      * @example
      * // Count the number of Recipes
-     * const count = await prisma.recipe.count({
+     * const count = await middleware.recipe.count({
      *   where: {
      *     // ... the filter for the Recipes we want to count
      *   }
@@ -1516,15 +1516,15 @@ export namespace Prisma {
      * @param {RecipeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
-     * // Where email contains prisma.io
+     * // Where email contains middleware.io
      * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
+     * const aggregations = await middleware.user.aggregate({
      *   _avg: {
      *     age: true,
      *   },
      *   where: {
      *     email: {
-     *       contains: "prisma.io",
+     *       contains: "middleware.io",
      *     },
      *   },
      *   orderBy: {
@@ -1542,7 +1542,7 @@ export namespace Prisma {
      * @param {RecipeGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
+     * const result = await middleware.user.groupBy({
      *   by: ['city', 'createdAt'],
      *   orderBy: {
      *     createdAt: true
@@ -1551,7 +1551,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends RecipeGroupByArgs,
@@ -1664,7 +1664,7 @@ export namespace Prisma {
     readonly ingredients: FieldRef<"Recipe", 'Json'>
     readonly steps: FieldRef<"Recipe", 'Json'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -1733,31 +1733,31 @@ export namespace Prisma {
     where?: RecipeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Recipes to fetch.
      */
     orderBy?: RecipeOrderByWithRelationInput | RecipeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Recipes.
      */
     cursor?: RecipeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Recipes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Recipes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Recipes.
      */
     distinct?: RecipeScalarFieldEnum | RecipeScalarFieldEnum[]
@@ -1785,31 +1785,31 @@ export namespace Prisma {
     where?: RecipeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Recipes to fetch.
      */
     orderBy?: RecipeOrderByWithRelationInput | RecipeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Recipes.
      */
     cursor?: RecipeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Recipes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Recipes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Recipes.
      */
     distinct?: RecipeScalarFieldEnum | RecipeScalarFieldEnum[]
@@ -1837,25 +1837,25 @@ export namespace Prisma {
     where?: RecipeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Recipes to fetch.
      */
     orderBy?: RecipeOrderByWithRelationInput | RecipeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Recipes.
      */
     cursor?: RecipeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Recipes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Recipes.
      */
     skip?: number
@@ -2113,18 +2113,35 @@ export namespace Prisma {
   export type FavoriteRecipeMinAggregateOutputType = {
     id: number | null
     recipeId: number | null
+    externalId: string | null
+    name: string | null
+    cookingTime: string | null
+    calories: string | null
+    image: string | null
     createdAt: Date | null
   }
 
   export type FavoriteRecipeMaxAggregateOutputType = {
     id: number | null
     recipeId: number | null
+    externalId: string | null
+    name: string | null
+    cookingTime: string | null
+    calories: string | null
+    image: string | null
     createdAt: Date | null
   }
 
   export type FavoriteRecipeCountAggregateOutputType = {
     id: number
     recipeId: number
+    externalId: number
+    name: number
+    cookingTime: number
+    calories: number
+    image: number
+    ingredients: number
+    steps: number
     createdAt: number
     _all: number
   }
@@ -2143,18 +2160,35 @@ export namespace Prisma {
   export type FavoriteRecipeMinAggregateInputType = {
     id?: true
     recipeId?: true
+    externalId?: true
+    name?: true
+    cookingTime?: true
+    calories?: true
+    image?: true
     createdAt?: true
   }
 
   export type FavoriteRecipeMaxAggregateInputType = {
     id?: true
     recipeId?: true
+    externalId?: true
+    name?: true
+    cookingTime?: true
+    calories?: true
+    image?: true
     createdAt?: true
   }
 
   export type FavoriteRecipeCountAggregateInputType = {
     id?: true
     recipeId?: true
+    externalId?: true
+    name?: true
+    cookingTime?: true
+    calories?: true
+    image?: true
+    ingredients?: true
+    steps?: true
     createdAt?: true
     _all?: true
   }
@@ -2166,55 +2200,55 @@ export namespace Prisma {
     where?: FavoriteRecipeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of FavoriteRecipes to fetch.
      */
     orderBy?: FavoriteRecipeOrderByWithRelationInput | FavoriteRecipeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
      */
     cursor?: FavoriteRecipeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` FavoriteRecipes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` FavoriteRecipes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned FavoriteRecipes
     **/
     _count?: true | FavoriteRecipeCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
     **/
     _avg?: FavoriteRecipeAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
     **/
     _sum?: FavoriteRecipeSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
     **/
     _min?: FavoriteRecipeMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
     **/
     _max?: FavoriteRecipeMaxAggregateInputType
@@ -2247,7 +2281,14 @@ export namespace Prisma {
 
   export type FavoriteRecipeGroupByOutputType = {
     id: number
-    recipeId: number
+    recipeId: number | null
+    externalId: string | null
+    name: string
+    cookingTime: string
+    calories: string
+    image: string | null
+    ingredients: JsonValue
+    steps: JsonValue
     createdAt: Date
     _count: FavoriteRecipeCountAggregateOutputType | null
     _avg: FavoriteRecipeAvgAggregateOutputType | null
@@ -2273,49 +2314,84 @@ export namespace Prisma {
   export type FavoriteRecipeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     recipeId?: boolean
+    externalId?: boolean
+    name?: boolean
+    cookingTime?: boolean
+    calories?: boolean
+    image?: boolean
+    ingredients?: boolean
+    steps?: boolean
     createdAt?: boolean
-    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    recipe?: boolean | FavoriteRecipe$recipeArgs<ExtArgs>
   }, ExtArgs["result"]["favoriteRecipe"]>
 
   export type FavoriteRecipeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     recipeId?: boolean
+    externalId?: boolean
+    name?: boolean
+    cookingTime?: boolean
+    calories?: boolean
+    image?: boolean
+    ingredients?: boolean
+    steps?: boolean
     createdAt?: boolean
-    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    recipe?: boolean | FavoriteRecipe$recipeArgs<ExtArgs>
   }, ExtArgs["result"]["favoriteRecipe"]>
 
   export type FavoriteRecipeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     recipeId?: boolean
+    externalId?: boolean
+    name?: boolean
+    cookingTime?: boolean
+    calories?: boolean
+    image?: boolean
+    ingredients?: boolean
+    steps?: boolean
     createdAt?: boolean
-    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    recipe?: boolean | FavoriteRecipe$recipeArgs<ExtArgs>
   }, ExtArgs["result"]["favoriteRecipe"]>
 
   export type FavoriteRecipeSelectScalar = {
     id?: boolean
     recipeId?: boolean
+    externalId?: boolean
+    name?: boolean
+    cookingTime?: boolean
+    calories?: boolean
+    image?: boolean
+    ingredients?: boolean
+    steps?: boolean
     createdAt?: boolean
   }
 
-  export type FavoriteRecipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recipeId" | "createdAt", ExtArgs["result"]["favoriteRecipe"]>
+  export type FavoriteRecipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recipeId" | "externalId" | "name" | "cookingTime" | "calories" | "image" | "ingredients" | "steps" | "createdAt", ExtArgs["result"]["favoriteRecipe"]>
   export type FavoriteRecipeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    recipe?: boolean | FavoriteRecipe$recipeArgs<ExtArgs>
   }
   export type FavoriteRecipeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    recipe?: boolean | FavoriteRecipe$recipeArgs<ExtArgs>
   }
   export type FavoriteRecipeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    recipe?: boolean | RecipeDefaultArgs<ExtArgs>
+    recipe?: boolean | FavoriteRecipe$recipeArgs<ExtArgs>
   }
 
   export type $FavoriteRecipePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FavoriteRecipe"
     objects: {
-      recipe: Prisma.$RecipePayload<ExtArgs>
+      recipe: Prisma.$RecipePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      recipeId: number
+      recipeId: number | null
+      externalId: string | null
+      name: string
+      cookingTime: string
+      calories: string
+      image: string | null
+      ingredients: Prisma.JsonValue
+      steps: Prisma.JsonValue
       createdAt: Date
     }, ExtArgs["result"]["favoriteRecipe"]>
     composites: {}
@@ -2335,7 +2411,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeFindUniqueArgs} args - Arguments to find a FavoriteRecipe
      * @example
      * // Get one FavoriteRecipe
-     * const favoriteRecipe = await prisma.favoriteRecipe.findUnique({
+     * const favoriteRecipe = await middleware.favoriteRecipe.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2349,7 +2425,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeFindUniqueOrThrowArgs} args - Arguments to find a FavoriteRecipe
      * @example
      * // Get one FavoriteRecipe
-     * const favoriteRecipe = await prisma.favoriteRecipe.findUniqueOrThrow({
+     * const favoriteRecipe = await middleware.favoriteRecipe.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2364,7 +2440,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeFindFirstArgs} args - Arguments to find a FavoriteRecipe
      * @example
      * // Get one FavoriteRecipe
-     * const favoriteRecipe = await prisma.favoriteRecipe.findFirst({
+     * const favoriteRecipe = await middleware.favoriteRecipe.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2380,7 +2456,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeFindFirstOrThrowArgs} args - Arguments to find a FavoriteRecipe
      * @example
      * // Get one FavoriteRecipe
-     * const favoriteRecipe = await prisma.favoriteRecipe.findFirstOrThrow({
+     * const favoriteRecipe = await middleware.favoriteRecipe.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
@@ -2395,14 +2471,14 @@ export namespace Prisma {
      * @param {FavoriteRecipeFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all FavoriteRecipes
-     * const favoriteRecipes = await prisma.favoriteRecipe.findMany()
-     * 
+     * const favoriteRecipes = await middleware.favoriteRecipe.findMany()
+     *
      * // Get first 10 FavoriteRecipes
-     * const favoriteRecipes = await prisma.favoriteRecipe.findMany({ take: 10 })
-     * 
+     * const favoriteRecipes = await middleware.favoriteRecipe.findMany({ take: 10 })
+     *
      * // Only select the `id`
-     * const favoriteRecipeWithIdOnly = await prisma.favoriteRecipe.findMany({ select: { id: true } })
-     * 
+     * const favoriteRecipeWithIdOnly = await middleware.favoriteRecipe.findMany({ select: { id: true } })
+     *
      */
     findMany<T extends FavoriteRecipeFindManyArgs>(args?: SelectSubset<T, FavoriteRecipeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoriteRecipePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
@@ -2411,12 +2487,12 @@ export namespace Prisma {
      * @param {FavoriteRecipeCreateArgs} args - Arguments to create a FavoriteRecipe.
      * @example
      * // Create one FavoriteRecipe
-     * const FavoriteRecipe = await prisma.favoriteRecipe.create({
+     * const FavoriteRecipe = await middleware.favoriteRecipe.create({
      *   data: {
      *     // ... data to create a FavoriteRecipe
      *   }
      * })
-     * 
+     *
      */
     create<T extends FavoriteRecipeCreateArgs>(args: SelectSubset<T, FavoriteRecipeCreateArgs<ExtArgs>>): Prisma__FavoriteRecipeClient<$Result.GetResult<Prisma.$FavoriteRecipePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -2425,12 +2501,12 @@ export namespace Prisma {
      * @param {FavoriteRecipeCreateManyArgs} args - Arguments to create many FavoriteRecipes.
      * @example
      * // Create many FavoriteRecipes
-     * const favoriteRecipe = await prisma.favoriteRecipe.createMany({
+     * const favoriteRecipe = await middleware.favoriteRecipe.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
-     *     
+     *
      */
     createMany<T extends FavoriteRecipeCreateManyArgs>(args?: SelectSubset<T, FavoriteRecipeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2439,14 +2515,14 @@ export namespace Prisma {
      * @param {FavoriteRecipeCreateManyAndReturnArgs} args - Arguments to create many FavoriteRecipes.
      * @example
      * // Create many FavoriteRecipes
-     * const favoriteRecipe = await prisma.favoriteRecipe.createManyAndReturn({
+     * const favoriteRecipe = await middleware.favoriteRecipe.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Create many FavoriteRecipes and only return the `id`
-     * const favoriteRecipeWithIdOnly = await prisma.favoriteRecipe.createManyAndReturn({
+     * const favoriteRecipeWithIdOnly = await middleware.favoriteRecipe.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2454,7 +2530,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     createManyAndReturn<T extends FavoriteRecipeCreateManyAndReturnArgs>(args?: SelectSubset<T, FavoriteRecipeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoriteRecipePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
@@ -2463,12 +2539,12 @@ export namespace Prisma {
      * @param {FavoriteRecipeDeleteArgs} args - Arguments to delete one FavoriteRecipe.
      * @example
      * // Delete one FavoriteRecipe
-     * const FavoriteRecipe = await prisma.favoriteRecipe.delete({
+     * const FavoriteRecipe = await middleware.favoriteRecipe.delete({
      *   where: {
      *     // ... filter to delete one FavoriteRecipe
      *   }
      * })
-     * 
+     *
      */
     delete<T extends FavoriteRecipeDeleteArgs>(args: SelectSubset<T, FavoriteRecipeDeleteArgs<ExtArgs>>): Prisma__FavoriteRecipeClient<$Result.GetResult<Prisma.$FavoriteRecipePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -2477,7 +2553,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeUpdateArgs} args - Arguments to update one FavoriteRecipe.
      * @example
      * // Update one FavoriteRecipe
-     * const favoriteRecipe = await prisma.favoriteRecipe.update({
+     * const favoriteRecipe = await middleware.favoriteRecipe.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2485,7 +2561,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     update<T extends FavoriteRecipeUpdateArgs>(args: SelectSubset<T, FavoriteRecipeUpdateArgs<ExtArgs>>): Prisma__FavoriteRecipeClient<$Result.GetResult<Prisma.$FavoriteRecipePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
@@ -2494,12 +2570,12 @@ export namespace Prisma {
      * @param {FavoriteRecipeDeleteManyArgs} args - Arguments to filter FavoriteRecipes to delete.
      * @example
      * // Delete a few FavoriteRecipes
-     * const { count } = await prisma.favoriteRecipe.deleteMany({
+     * const { count } = await middleware.favoriteRecipe.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
-     * 
+     *
      */
     deleteMany<T extends FavoriteRecipeDeleteManyArgs>(args?: SelectSubset<T, FavoriteRecipeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2510,7 +2586,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many FavoriteRecipes
-     * const favoriteRecipe = await prisma.favoriteRecipe.updateMany({
+     * const favoriteRecipe = await middleware.favoriteRecipe.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2518,7 +2594,7 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
+     *
      */
     updateMany<T extends FavoriteRecipeUpdateManyArgs>(args: SelectSubset<T, FavoriteRecipeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
@@ -2527,7 +2603,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeUpdateManyAndReturnArgs} args - Arguments to update many FavoriteRecipes.
      * @example
      * // Update many FavoriteRecipes
-     * const favoriteRecipe = await prisma.favoriteRecipe.updateManyAndReturn({
+     * const favoriteRecipe = await middleware.favoriteRecipe.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2535,9 +2611,9 @@ export namespace Prisma {
      *     // ... provide data here
      *   ]
      * })
-     * 
+     *
      * // Update zero or more FavoriteRecipes and only return the `id`
-     * const favoriteRecipeWithIdOnly = await prisma.favoriteRecipe.updateManyAndReturn({
+     * const favoriteRecipeWithIdOnly = await middleware.favoriteRecipe.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -2548,7 +2624,7 @@ export namespace Prisma {
      * })
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * 
+     *
      */
     updateManyAndReturn<T extends FavoriteRecipeUpdateManyAndReturnArgs>(args: SelectSubset<T, FavoriteRecipeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavoriteRecipePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
@@ -2557,7 +2633,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeUpsertArgs} args - Arguments to update or create a FavoriteRecipe.
      * @example
      * // Update or create a FavoriteRecipe
-     * const favoriteRecipe = await prisma.favoriteRecipe.upsert({
+     * const favoriteRecipe = await middleware.favoriteRecipe.upsert({
      *   create: {
      *     // ... data to create a FavoriteRecipe
      *   },
@@ -2579,7 +2655,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeCountArgs} args - Arguments to filter FavoriteRecipes to count.
      * @example
      * // Count the number of FavoriteRecipes
-     * const count = await prisma.favoriteRecipe.count({
+     * const count = await middleware.favoriteRecipe.count({
      *   where: {
      *     // ... the filter for the FavoriteRecipes we want to count
      *   }
@@ -2602,15 +2678,15 @@ export namespace Prisma {
      * @param {FavoriteRecipeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
-     * // Where email contains prisma.io
+     * // Where email contains middleware.io
      * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
+     * const aggregations = await middleware.user.aggregate({
      *   _avg: {
      *     age: true,
      *   },
      *   where: {
      *     email: {
-     *       contains: "prisma.io",
+     *       contains: "middleware.io",
      *     },
      *   },
      *   orderBy: {
@@ -2628,7 +2704,7 @@ export namespace Prisma {
      * @param {FavoriteRecipeGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
+     * const result = await middleware.user.groupBy({
      *   by: ['city', 'createdAt'],
      *   orderBy: {
      *     createdAt: true
@@ -2637,7 +2713,7 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
+     *
     **/
     groupBy<
       T extends FavoriteRecipeGroupByArgs,
@@ -2711,7 +2787,7 @@ export namespace Prisma {
    */
   export interface Prisma__FavoriteRecipeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    recipe<T extends RecipeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RecipeDefaultArgs<ExtArgs>>): Prisma__RecipeClient<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    recipe<T extends FavoriteRecipe$recipeArgs<ExtArgs> = {}>(args?: Subset<T, FavoriteRecipe$recipeArgs<ExtArgs>>): Prisma__RecipeClient<$Result.GetResult<Prisma.$RecipePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2743,9 +2819,16 @@ export namespace Prisma {
   interface FavoriteRecipeFieldRefs {
     readonly id: FieldRef<"FavoriteRecipe", 'Int'>
     readonly recipeId: FieldRef<"FavoriteRecipe", 'Int'>
+    readonly externalId: FieldRef<"FavoriteRecipe", 'String'>
+    readonly name: FieldRef<"FavoriteRecipe", 'String'>
+    readonly cookingTime: FieldRef<"FavoriteRecipe", 'String'>
+    readonly calories: FieldRef<"FavoriteRecipe", 'String'>
+    readonly image: FieldRef<"FavoriteRecipe", 'String'>
+    readonly ingredients: FieldRef<"FavoriteRecipe", 'Json'>
+    readonly steps: FieldRef<"FavoriteRecipe", 'Json'>
     readonly createdAt: FieldRef<"FavoriteRecipe", 'DateTime'>
   }
-    
+
 
   // Custom InputTypes
   /**
@@ -2814,31 +2897,31 @@ export namespace Prisma {
     where?: FavoriteRecipeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of FavoriteRecipes to fetch.
      */
     orderBy?: FavoriteRecipeOrderByWithRelationInput | FavoriteRecipeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for FavoriteRecipes.
      */
     cursor?: FavoriteRecipeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` FavoriteRecipes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` FavoriteRecipes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of FavoriteRecipes.
      */
     distinct?: FavoriteRecipeScalarFieldEnum | FavoriteRecipeScalarFieldEnum[]
@@ -2866,31 +2949,31 @@ export namespace Prisma {
     where?: FavoriteRecipeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of FavoriteRecipes to fetch.
      */
     orderBy?: FavoriteRecipeOrderByWithRelationInput | FavoriteRecipeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for FavoriteRecipes.
      */
     cursor?: FavoriteRecipeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` FavoriteRecipes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` FavoriteRecipes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of FavoriteRecipes.
      */
     distinct?: FavoriteRecipeScalarFieldEnum | FavoriteRecipeScalarFieldEnum[]
@@ -2918,25 +3001,25 @@ export namespace Prisma {
     where?: FavoriteRecipeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of FavoriteRecipes to fetch.
      */
     orderBy?: FavoriteRecipeOrderByWithRelationInput | FavoriteRecipeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing FavoriteRecipes.
      */
     cursor?: FavoriteRecipeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` FavoriteRecipes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` FavoriteRecipes.
      */
     skip?: number
@@ -3140,6 +3223,25 @@ export namespace Prisma {
   }
 
   /**
+   * FavoriteRecipe.recipe
+   */
+  export type FavoriteRecipe$recipeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Recipe
+     */
+    select?: RecipeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Recipe
+     */
+    omit?: RecipeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecipeInclude<ExtArgs> | null
+    where?: RecipeWhereInput
+  }
+
+  /**
    * FavoriteRecipe without action
    */
   export type FavoriteRecipeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3189,6 +3291,13 @@ export namespace Prisma {
   export const FavoriteRecipeScalarFieldEnum: {
     id: 'id',
     recipeId: 'recipeId',
+    externalId: 'externalId',
+    name: 'name',
+    cookingTime: 'cookingTime',
+    calories: 'calories',
+    image: 'image',
+    ingredients: 'ingredients',
+    steps: 'steps',
     createdAt: 'createdAt'
   };
 
@@ -3244,70 +3353,70 @@ export namespace Prisma {
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
+
 
 
   /**
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
+
 
 
   /**
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
+
 
 
   /**
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
+
 
 
   /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
+
 
 
   /**
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
+
 
 
   /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
+
 
 
   /**
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
+
   /**
    * Deep Input Types
    */
@@ -3390,14 +3499,28 @@ export namespace Prisma {
     OR?: FavoriteRecipeWhereInput[]
     NOT?: FavoriteRecipeWhereInput | FavoriteRecipeWhereInput[]
     id?: IntFilter<"FavoriteRecipe"> | number
-    recipeId?: IntFilter<"FavoriteRecipe"> | number
+    recipeId?: IntNullableFilter<"FavoriteRecipe"> | number | null
+    externalId?: StringNullableFilter<"FavoriteRecipe"> | string | null
+    name?: StringFilter<"FavoriteRecipe"> | string
+    cookingTime?: StringFilter<"FavoriteRecipe"> | string
+    calories?: StringFilter<"FavoriteRecipe"> | string
+    image?: StringNullableFilter<"FavoriteRecipe"> | string | null
+    ingredients?: JsonFilter<"FavoriteRecipe">
+    steps?: JsonFilter<"FavoriteRecipe">
     createdAt?: DateTimeFilter<"FavoriteRecipe"> | Date | string
-    recipe?: XOR<RecipeScalarRelationFilter, RecipeWhereInput>
+    recipe?: XOR<RecipeNullableScalarRelationFilter, RecipeWhereInput> | null
   }
 
   export type FavoriteRecipeOrderByWithRelationInput = {
     id?: SortOrder
-    recipeId?: SortOrder
+    recipeId?: SortOrderInput | SortOrder
+    externalId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    cookingTime?: SortOrder
+    calories?: SortOrder
+    image?: SortOrderInput | SortOrder
+    ingredients?: SortOrder
+    steps?: SortOrder
     createdAt?: SortOrder
     recipe?: RecipeOrderByWithRelationInput
   }
@@ -3405,16 +3528,30 @@ export namespace Prisma {
   export type FavoriteRecipeWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     recipeId?: number
+    externalId?: string
     AND?: FavoriteRecipeWhereInput | FavoriteRecipeWhereInput[]
     OR?: FavoriteRecipeWhereInput[]
     NOT?: FavoriteRecipeWhereInput | FavoriteRecipeWhereInput[]
+    name?: StringFilter<"FavoriteRecipe"> | string
+    cookingTime?: StringFilter<"FavoriteRecipe"> | string
+    calories?: StringFilter<"FavoriteRecipe"> | string
+    image?: StringNullableFilter<"FavoriteRecipe"> | string | null
+    ingredients?: JsonFilter<"FavoriteRecipe">
+    steps?: JsonFilter<"FavoriteRecipe">
     createdAt?: DateTimeFilter<"FavoriteRecipe"> | Date | string
-    recipe?: XOR<RecipeScalarRelationFilter, RecipeWhereInput>
-  }, "id" | "recipeId">
+    recipe?: XOR<RecipeNullableScalarRelationFilter, RecipeWhereInput> | null
+  }, "id" | "recipeId" | "externalId">
 
   export type FavoriteRecipeOrderByWithAggregationInput = {
     id?: SortOrder
-    recipeId?: SortOrder
+    recipeId?: SortOrderInput | SortOrder
+    externalId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    cookingTime?: SortOrder
+    calories?: SortOrder
+    image?: SortOrderInput | SortOrder
+    ingredients?: SortOrder
+    steps?: SortOrder
     createdAt?: SortOrder
     _count?: FavoriteRecipeCountOrderByAggregateInput
     _avg?: FavoriteRecipeAvgOrderByAggregateInput
@@ -3428,7 +3565,14 @@ export namespace Prisma {
     OR?: FavoriteRecipeScalarWhereWithAggregatesInput[]
     NOT?: FavoriteRecipeScalarWhereWithAggregatesInput | FavoriteRecipeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"FavoriteRecipe"> | number
-    recipeId?: IntWithAggregatesFilter<"FavoriteRecipe"> | number
+    recipeId?: IntNullableWithAggregatesFilter<"FavoriteRecipe"> | number | null
+    externalId?: StringNullableWithAggregatesFilter<"FavoriteRecipe"> | string | null
+    name?: StringWithAggregatesFilter<"FavoriteRecipe"> | string
+    cookingTime?: StringWithAggregatesFilter<"FavoriteRecipe"> | string
+    calories?: StringWithAggregatesFilter<"FavoriteRecipe"> | string
+    image?: StringNullableWithAggregatesFilter<"FavoriteRecipe"> | string | null
+    ingredients?: JsonWithAggregatesFilter<"FavoriteRecipe">
+    steps?: JsonWithAggregatesFilter<"FavoriteRecipe">
     createdAt?: DateTimeWithAggregatesFilter<"FavoriteRecipe"> | Date | string
   }
 
@@ -3511,40 +3655,89 @@ export namespace Prisma {
   }
 
   export type FavoriteRecipeCreateInput = {
+    externalId?: string | null
+    name: string
+    cookingTime: string
+    calories: string
+    image?: string | null
+    ingredients: JsonNullValueInput | InputJsonValue
+    steps: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
-    recipe: RecipeCreateNestedOneWithoutFavoritesInput
+    recipe?: RecipeCreateNestedOneWithoutFavoritesInput
   }
 
   export type FavoriteRecipeUncheckedCreateInput = {
     id?: number
-    recipeId: number
+    recipeId?: number | null
+    externalId?: string | null
+    name: string
+    cookingTime: string
+    calories: string
+    image?: string | null
+    ingredients: JsonNullValueInput | InputJsonValue
+    steps: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
   }
 
   export type FavoriteRecipeUpdateInput = {
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    cookingTime?: StringFieldUpdateOperationsInput | string
+    calories?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    ingredients?: JsonNullValueInput | InputJsonValue
+    steps?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    recipe?: RecipeUpdateOneRequiredWithoutFavoritesNestedInput
+    recipe?: RecipeUpdateOneWithoutFavoritesNestedInput
   }
 
   export type FavoriteRecipeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    recipeId?: IntFieldUpdateOperationsInput | number
+    recipeId?: NullableIntFieldUpdateOperationsInput | number | null
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    cookingTime?: StringFieldUpdateOperationsInput | string
+    calories?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    ingredients?: JsonNullValueInput | InputJsonValue
+    steps?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriteRecipeCreateManyInput = {
     id?: number
-    recipeId: number
+    recipeId?: number | null
+    externalId?: string | null
+    name: string
+    cookingTime: string
+    calories: string
+    image?: string | null
+    ingredients: JsonNullValueInput | InputJsonValue
+    steps: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
   }
 
   export type FavoriteRecipeUpdateManyMutationInput = {
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    cookingTime?: StringFieldUpdateOperationsInput | string
+    calories?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    ingredients?: JsonNullValueInput | InputJsonValue
+    steps?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriteRecipeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    recipeId?: IntFieldUpdateOperationsInput | number
+    recipeId?: NullableIntFieldUpdateOperationsInput | number | null
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    cookingTime?: StringFieldUpdateOperationsInput | string
+    calories?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    ingredients?: JsonNullValueInput | InputJsonValue
+    steps?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -3762,14 +3955,32 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
-  export type RecipeScalarRelationFilter = {
-    is?: RecipeWhereInput
-    isNot?: RecipeWhereInput
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type RecipeNullableScalarRelationFilter = {
+    is?: RecipeWhereInput | null
+    isNot?: RecipeWhereInput | null
   }
 
   export type FavoriteRecipeCountOrderByAggregateInput = {
     id?: SortOrder
     recipeId?: SortOrder
+    externalId?: SortOrder
+    name?: SortOrder
+    cookingTime?: SortOrder
+    calories?: SortOrder
+    image?: SortOrder
+    ingredients?: SortOrder
+    steps?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -3781,18 +3992,44 @@ export namespace Prisma {
   export type FavoriteRecipeMaxOrderByAggregateInput = {
     id?: SortOrder
     recipeId?: SortOrder
+    externalId?: SortOrder
+    name?: SortOrder
+    cookingTime?: SortOrder
+    calories?: SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
   }
 
   export type FavoriteRecipeMinOrderByAggregateInput = {
     id?: SortOrder
     recipeId?: SortOrder
+    externalId?: SortOrder
+    name?: SortOrder
+    cookingTime?: SortOrder
+    calories?: SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
   }
 
   export type FavoriteRecipeSumOrderByAggregateInput = {
     id?: SortOrder
     recipeId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type FavoriteRecipeCreateNestedOneWithoutRecipeInput = {
@@ -3853,12 +4090,22 @@ export namespace Prisma {
     connect?: RecipeWhereUniqueInput
   }
 
-  export type RecipeUpdateOneRequiredWithoutFavoritesNestedInput = {
+  export type RecipeUpdateOneWithoutFavoritesNestedInput = {
     create?: XOR<RecipeCreateWithoutFavoritesInput, RecipeUncheckedCreateWithoutFavoritesInput>
     connectOrCreate?: RecipeCreateOrConnectWithoutFavoritesInput
     upsert?: RecipeUpsertWithoutFavoritesInput
+    disconnect?: RecipeWhereInput | boolean
+    delete?: RecipeWhereInput | boolean
     connect?: RecipeWhereUniqueInput
     update?: XOR<XOR<RecipeUpdateToOneWithWhereWithoutFavoritesInput, RecipeUpdateWithoutFavoritesInput>, RecipeUncheckedUpdateWithoutFavoritesInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -4020,12 +4267,53 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type FavoriteRecipeCreateWithoutRecipeInput = {
+    externalId?: string | null
+    name: string
+    cookingTime: string
+    calories: string
+    image?: string | null
+    ingredients: JsonNullValueInput | InputJsonValue
+    steps: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
   }
 
   export type FavoriteRecipeUncheckedCreateWithoutRecipeInput = {
     id?: number
+    externalId?: string | null
+    name: string
+    cookingTime: string
+    calories: string
+    image?: string | null
+    ingredients: JsonNullValueInput | InputJsonValue
+    steps: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
   }
 
@@ -4046,11 +4334,25 @@ export namespace Prisma {
   }
 
   export type FavoriteRecipeUpdateWithoutRecipeInput = {
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    cookingTime?: StringFieldUpdateOperationsInput | string
+    calories?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    ingredients?: JsonNullValueInput | InputJsonValue
+    steps?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FavoriteRecipeUncheckedUpdateWithoutRecipeInput = {
     id?: IntFieldUpdateOperationsInput | number
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    cookingTime?: StringFieldUpdateOperationsInput | string
+    calories?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    ingredients?: JsonNullValueInput | InputJsonValue
+    steps?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

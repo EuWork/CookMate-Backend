@@ -131,6 +131,13 @@ exports.Prisma.RecipeScalarFieldEnum = {
 exports.Prisma.FavoriteRecipeScalarFieldEnum = {
   id: 'id',
   recipeId: 'recipeId',
+  externalId: 'externalId',
+  name: 'name',
+  cookingTime: 'cookingTime',
+  calories: 'calories',
+  image: 'image',
+  ingredients: 'ingredients',
+  steps: 'steps',
   createdAt: 'createdAt'
 };
 

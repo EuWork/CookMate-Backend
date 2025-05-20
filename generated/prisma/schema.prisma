@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider = "middleware-client-js"
+  output   = "../generated/middleware"
 }
 
 datasource db {
@@ -21,8 +21,17 @@ model Recipe {
 }
 
 model FavoriteRecipe {
-  id        Int      @id @default(autoincrement())
-  recipeId  Int      @unique
-  createdAt DateTime @default(now())
-  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  id          Int      @id @default(autoincrement())
+  recipeId    Int?     @unique
+  externalId  String?
+  name        String
+  cookingTime String
+  calories    String
+  image       String?
+  ingredients Json
+  steps       Json
+  createdAt   DateTime @default(now())
+  recipe      Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  @@unique([externalId])
 }

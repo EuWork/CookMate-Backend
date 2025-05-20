@@ -1,18 +1,27 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import { PrismaClient } from "../generated/prisma";
 import cors from "cors";
+import rateLimit from "express-rate-limit";
+import prisma from "./middleware/middleware";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
-const prisma = new PrismaClient();
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: 'Слишком много запросов, попробуйте позже.'
+});
 
 app.use(cors());
 app.use(express.json());
+app.use(apiLimiter);
 
+// Create recipe
 app.post("/recipes", async (req: Request, res: Response) => {
   try {
     const { name, cookingTime, calories, image, ingredients, steps } = req.body;
@@ -23,56 +32,28 @@ app.post("/recipes", async (req: Request, res: Response) => {
         cookingTime,
         calories,
         image: image || null,
-        ingredients: JSON.stringify(ingredients),
-        steps: JSON.stringify(steps),
+        ingredients,
+        steps,
       }
     });
 
-    return res.status(201).json({
-      ...newRecipe,
-      ingredients: (newRecipe.ingredients),
-      steps: (newRecipe.steps),
-    });
-
+    return res.status(201).json(newRecipe);
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }
 });
 
+// Get all recipes
 app.get("/recipes", async (_: Request, res: Response) => {
   try {
     const recipes = await prisma.recipe.findMany();
-
-    const formattedRecipes = recipes.map(recipe => {
-      let ingredientsParsed: Array<{name: string, amount: string}> = [];
-      if (recipe.ingredients && typeof recipe.ingredients === 'string') {
-        try {
-          ingredientsParsed = JSON.parse(recipe.ingredients);
-        } catch (e) {
-        }
-      }
-
-      let stepsParsed: string[] = [];
-      if (recipe.steps && typeof recipe.steps === 'string') {
-        try {
-          stepsParsed = JSON.parse(recipe.steps);
-        } catch (e) {
-        }
-      }
-
-      return {
-        ...recipe,
-        ingredients: ingredientsParsed,
-        steps: stepsParsed
-      };
-    });
-
-    return res.status(200).json(formattedRecipes);
+    return res.status(200).json(recipes);
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }
 });
 
+// Update recipe
 app.put("/recipes/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -85,22 +66,19 @@ app.put("/recipes/:id", async (req: Request, res: Response) => {
         cookingTime,
         calories,
         image: image || null,
-        ingredients: JSON.stringify(ingredients),
-        steps: JSON.stringify(steps),
+        ingredients,
+        steps,
       }
     });
 
-    return res.status(200).json({
-      ...updatedRecipe,
-      ingredients: JSON.parse(updatedRecipe.ingredients as string),
-      steps: JSON.parse(updatedRecipe.steps as string),
-    });
+    return res.status(200).json(updatedRecipe);
   } catch (error) {
     console.error("Error updating recipe:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 });
 
+// Delete recipe
 app.delete("/recipes/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -120,11 +98,11 @@ app.post("/favorites", async (req: Request, res: Response) => {
   try {
     const { recipeId } = req.body;
 
-    const recipeExists = await prisma.recipe.findUnique({
+    const recipe = await prisma.recipe.findUnique({
       where: { id: recipeId }
     });
 
-    if (!recipeExists) {
+    if (!recipe) {
       return res.status(404).json({ error: "Recipe not found" });
     }
 
@@ -136,16 +114,26 @@ app.post("/favorites", async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Recipe already in favorites" });
     }
 
-    await prisma.favoriteRecipe.create({
-      data: { recipeId }
+    const newFavorite = await prisma.favoriteRecipe.create({
+      data: {
+        recipeId,
+        name: recipe.name,
+        cookingTime: recipe.cookingTime,
+        calories: recipe.calories,
+        image: recipe.image,
+        ingredients: recipe.ingredients ?? [],
+        steps: recipe.steps ?? []
+      }
     });
 
-    return res.status(201).json({ success: true });
+    return res.status(201).json(newFavorite);
   } catch (error) {
+    console.error("Error adding favorite:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 });
 
+// Get all favorites
 app.get("/favorites", async (_: Request, res: Response) => {
   try {
     const favorites = await prisma.favoriteRecipe.findMany({
@@ -153,12 +141,25 @@ app.get("/favorites", async (_: Request, res: Response) => {
         recipe: true
       }
     });
-    return res.status(200).json(favorites.map(fav => fav.recipe));
+
+    const formattedFavorites = favorites.map(fav => ({
+      id: fav.externalId || fav.recipe?.id.toString(),
+      name: fav.name,
+      cookingTime: fav.cookingTime,
+      calories: fav.calories,
+      image: fav.image,
+      ingredients: fav.ingredients,
+      steps: fav.steps,
+      isExternal: !!fav.externalId
+    }));
+
+    return res.status(200).json(formattedFavorites);
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }
 });
 
+// Check if recipe is favorite
 app.get("/favorites/:recipeId", async (req: Request, res: Response) => {
   try {
     const { recipeId } = req.params;
@@ -173,15 +174,67 @@ app.get("/favorites/:recipeId", async (req: Request, res: Response) => {
   }
 });
 
-app.delete("/favorites/:recipeId", async (req: Request, res: Response) => {
+// Delete favorite
+app.delete("/favorites/:id", async (req: Request, res: Response) => {
   try {
-    const { recipeId } = req.params;
+    const { id } = req.params;
 
-    await prisma.favoriteRecipe.delete({
-      where: { recipeId: parseInt(recipeId) }
+    const deletedByRecipeId = await prisma.favoriteRecipe.deleteMany({
+      where: {
+        OR: [
+          { recipeId: parseInt(id) },
+          { externalId: id }
+        ]
+      }
     });
 
-    return res.status(200).send();
+    if (deletedByRecipeId.count === 0) {
+      return res.status(404).json({ error: "Favorite recipe not found" });
+    }
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error("Error deleting favorite:", error);
+    return res.status(500).json({
+      error: "Internal server error",
+    });
+  }
+});
+
+// Add external recipe to favorites
+app.post("/favorites/external", async (req: Request, res: Response) => {
+  try {
+    const {
+      externalId,
+      name,
+      cookingTime,
+      calories,
+      image,
+      ingredients,
+      steps
+    } = req.body;
+
+    const existingFavorite = await prisma.favoriteRecipe.findUnique({
+      where: { externalId }
+    });
+
+    if (existingFavorite) {
+      return res.status(400).json({ error: "Recipe already in favorites" });
+    }
+
+    const newFavorite = await prisma.favoriteRecipe.create({
+      data: {
+        externalId,
+        name,
+        cookingTime,
+        calories,
+        image: image || null,
+        ingredients,
+        steps
+      }
+    });
+
+    return res.status(201).json(newFavorite);
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }

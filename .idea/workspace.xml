@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3cda5f1-bdfb-4acb-b819-e17ee30d3f10" name="Changes" comment="" />
+    <list default="true" id="d3cda5f1-bdfb-4acb-b819-e17ee30d3f10" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/middleware/middleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/crypto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/edge.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/edge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/index-browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/index-browser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/runtime/edge-esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/runtime/edge-esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/runtime/edge.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/runtime/edge.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/runtime/index-browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/runtime/index-browser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/runtime/library.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/runtime/library.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/runtime/library.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/runtime/library.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/runtime/react-native.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/runtime/react-native.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/runtime/wasm.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/runtime/wasm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/prisma/wasm.js" beforeDir="false" afterPath="$PROJECT_DIR$/generated/prisma/wasm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,22 +55,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Zadol/WebstormProjects/CookMate-backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.dev.executor": "Run",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "ts.external.directory.path": "C:\\Users\\Zadol\\WebstormProjects\\CookMate-backend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Zadol/WebstormProjects/InternetShop-backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Zadol\\WebstormProjects\\CookMate-backend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -72,6 +96,9 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\Zadol\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="d3cda5f1-bdfb-4acb-b819-e17ee30d3f10" name="Changes" comment="" />
@@ -83,7 +110,40 @@
       <workItem from="1744713039616" duration="19637000" />
       <workItem from="1744777531614" duration="9481000" />
       <workItem from="1744877885888" duration="11836000" />
-      <workItem from="1744982247126" duration="1246000" />
+      <workItem from="1744982247126" duration="1727000" />
+      <workItem from="1744983994187" duration="408000" />
+      <workItem from="1744990942514" duration="2000" />
+      <workItem from="1745140519326" duration="3765000" />
+      <workItem from="1745501165623" duration="552000" />
+      <workItem from="1745563180774" duration="4523000" />
+      <workItem from="1745730409850" duration="5686000" />
+      <workItem from="1745820052680" duration="471000" />
+      <workItem from="1745838120048" duration="8000" />
+      <workItem from="1745915753680" duration="1524000" />
+      <workItem from="1745933734602" duration="6000" />
+      <workItem from="1745998295259" duration="3791000" />
+      <workItem from="1746076729982" duration="7000" />
+      <workItem from="1746081526162" duration="3282000" />
+      <workItem from="1746172190542" duration="1483000" />
+      <workItem from="1746178931178" duration="195000" />
+      <workItem from="1746360268031" duration="727000" />
+      <workItem from="1746522996353" duration="2996000" />
+      <workItem from="1746532904033" duration="7000" />
+      <workItem from="1746597445301" duration="2049000" />
+      <workItem from="1746605000239" duration="949000" />
+      <workItem from="1746606100742" duration="3000" />
+      <workItem from="1746606351941" duration="2000" />
+      <workItem from="1746606787321" duration="19000" />
+      <workItem from="1746606912470" duration="37000" />
+      <workItem from="1746607163324" duration="12000" />
+      <workItem from="1746608306039" duration="1420000" />
+      <workItem from="1746611065888" duration="13000" />
+      <workItem from="1746611568808" duration="344000" />
+      <workItem from="1746612532631" duration="14000" />
+      <workItem from="1746612563042" duration="604000" />
+      <workItem from="1747127952476" duration="75000" />
+      <workItem from="1747130999866" duration="631000" />
+      <workItem from="1747722186918" duration="15965000" />
     </task>
     <servers />
   </component>

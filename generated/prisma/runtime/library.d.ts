@@ -25,7 +25,7 @@ declare type AccelerateUtils = EngineConfig['accelerateUtils'];
 
 export declare type Action = keyof typeof DMMF_2.ModelAction | 'executeRaw' | 'queryRaw' | 'runCommandRaw';
 
-declare type ActiveConnectorType = Exclude<ConnectorType, 'postgres' | 'prisma+postgres'>;
+declare type ActiveConnectorType = Exclude<ConnectorType, 'postgres' | 'middleware+postgres'>;
 
 /**
  * An interface that exposes some basic information about the
@@ -332,7 +332,7 @@ export declare function createParam(name: string): Param<unknown, string>;
  * have to declare all properties any `RequestInit` implementation in existence
  * could possibly have), which is not possible.
  *
- * Since `@prisma/extension-accelerate` redefines the type of
+ * Since `@middleware/extension-accelerate` redefines the type of
  * `__internalParams.customDataProxyFetch` to its own type anyway (probably for
  * exactly this reason), our definition is never actually used and is completely
  * ignored, so it doesn't matter, and we can just use `unknown` as the type of
@@ -400,8 +400,8 @@ export declare const Debug: typeof debugCreate & {
  *
  * @example
  * ```ts
- * import Debug from '@prisma/debug'
- * const debug = Debug('prisma:client')
+ * import Debug from '@middleware/debug'
+ * const debug = Debug('middleware:client')
  * debug('Hello World')
  * ```
  */
@@ -1031,7 +1031,7 @@ declare interface EngineConfig {
     logEmitter: LogEmitter;
     transactionOptions: Transaction_2.Options;
     /**
-     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`.
+     * Instance of a Driver Adapter, e.g., like one provided by `@middleware/adapter-planetscale`.
      * If set, this is only used in the library engine, and all queries would be performed through it,
      * rather than Prisma's Rust drivers.
      * @remarks only used by LibraryEngine.ts
@@ -1054,12 +1054,12 @@ declare interface EngineConfig {
     inlineSchemaHash: string;
     /**
      * The helper for interaction with OTEL tracing
-     * @remarks enabling is determined by the client and @prisma/instrumentation package
+     * @remarks enabling is determined by the client and @middleware/instrumentation package
      */
     tracingHelper: TracingHelper;
     /**
-     * Information about whether we have not found a schema.prisma file in the
-     * default location, and that we fell back to finding the schema.prisma file
+     * Information about whether we have not found a schema.middleware file in the
+     * default location, and that we fell back to finding the schema.middleware file
      * in the current working directory. This usually means it has been bundled.
      */
     isBundled?: boolean;
@@ -1672,7 +1672,7 @@ export declare type GetPrismaClientConfig = {
      */
     inlineSchemaHash: string;
     /**
-     * A marker to indicate that the client was not generated via `prisma
+     * A marker to indicate that the client was not generated via `middleware
      * generate` but was generated via `generate --postinstall` script instead.
      * @remarks used to error for Vercel/Netlify for schema caching issues
      */
@@ -1686,8 +1686,8 @@ export declare type GetPrismaClientConfig = {
      */
     ciName?: string;
     /**
-     * Information about whether we have not found a schema.prisma file in the
-     * default location, and that we fell back to finding the schema.prisma file
+     * Information about whether we have not found a schema.middleware file in the
+     * default location, and that we fell back to finding the schema.middleware file
      * in the current working directory. This usually means it has been bundled.
      */
     isBundled?: boolean;
@@ -2338,7 +2338,7 @@ export declare const objectEnumValues: {
     };
 };
 
-declare const officialPrismaAdapters: readonly ["@prisma/adapter-planetscale", "@prisma/adapter-neon", "@prisma/adapter-libsql", "@prisma/adapter-d1", "@prisma/adapter-pg", "@prisma/adapter-pg-worker"];
+declare const officialPrismaAdapters: readonly ["@middleware/adapter-planetscale", "@middleware/adapter-neon", "@middleware/adapter-libsql", "@middleware/adapter-d1", "@middleware/adapter-pg", "@middleware/adapter-pg-worker"];
 
 export declare type Omission = Record<string, boolean | Skip>;
 
@@ -2456,15 +2456,15 @@ export declare class PrismaClientKnownRequestError extends Error implements Erro
 
 export declare type PrismaClientOptions = {
     /**
-     * Overwrites the primary datasource url from your schema.prisma file
+     * Overwrites the primary datasource url from your schema.middleware file
      */
     datasourceUrl?: string;
     /**
-     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale.
+     * Instance of a Driver Adapter, e.g., like one provided by `@middleware/adapter-planetscale.
      */
     adapter?: SqlDriverAdapterFactory | null;
     /**
-     * Overwrites the datasource url from your schema.prisma file
+     * Overwrites the datasource url from your schema.middleware file
      */
     datasources?: Datasources;
     /**
